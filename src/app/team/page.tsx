@@ -34,7 +34,7 @@ const carouselItems = FOUNDING_LEADS.filter((m) => m.photo).map((m) => ({
 
 function MemberPhoto({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative aspect-3/4 overflow-hidden bg-black">
+    <div className="relative aspect-3/4 w-full shrink-0 overflow-hidden bg-black">
       <Image
         src={src}
         alt={alt}
@@ -72,7 +72,7 @@ export default function TeamPage() {
             />
           </Reveal>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <Reveal delay={0.06}>
+            <Reveal delay={0.06} className="h-full">
               <Box className="h-full border-l-2 border-l-white/60">
                 <p className="hud-label mb-4 text-white/70">Core Expertise</p>
                 <ul className="space-y-2">
@@ -85,7 +85,7 @@ export default function TeamPage() {
                 </ul>
               </Box>
             </Reveal>
-            <Reveal delay={0.1}>
+            <Reveal delay={0.1} className="h-full">
               <Box className="h-full border-l-2 border-l-white/60">
                 <p className="hud-label mb-4 text-white/70">Competition Platforms</p>
                 <ul className="space-y-2">
@@ -134,16 +134,18 @@ export default function TeamPage() {
           </Reveal>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {TEAM_MEMBERS.map((m, i) => (
-              <Reveal key={`${m.name}-${m.role}`} delay={i * 0.03}>
-                <Box flush className="overflow-hidden p-0!">
+              <Reveal key={`${m.name}-${m.role}`} delay={i * 0.03} className="h-full">
+                <Box flush className="flex h-full flex-col overflow-hidden p-0!" contentClassName="flex h-full flex-col">
                   {m.photo ? <MemberPhoto src={m.photo} alt={m.name} /> : null}
-                  <div className="border-t border-white/10 p-4">
-                    <p className="hud-label text-white/60">{m.group}</p>
-                    <h3 className="mt-2 font-display text-lg font-bold text-white">
-                      {m.name}
-                    </h3>
-                    <p className="text-sm font-medium text-white/90">{m.role}</p>
-                    <p className="mt-1 text-xs text-white/65">{m.subsystem}</p>
+                  <div className="flex flex-1 flex-col justify-between border-t border-white/10 p-4">
+                    <div>
+                      <p className="hud-label flex min-h-[2rem] items-center leading-tight text-white/60">{m.group}</p>
+                      <h3 className="mt-2 font-display text-lg font-bold text-white">
+                        {m.name}
+                      </h3>
+                      <p className="text-sm font-medium text-white/90">{m.role}</p>
+                    </div>
+                    <p className="mt-2 text-xs text-white/65">{m.subsystem}</p>
                   </div>
                 </Box>
               </Reveal>

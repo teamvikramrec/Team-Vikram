@@ -8,6 +8,7 @@ type BoxProps = HTMLAttributes<HTMLDivElement> & {
   glow?: boolean;
   /** Padless useful for media tiles */
   flush?: boolean;
+  contentClassName?: string;
 };
 
 /**
@@ -16,6 +17,7 @@ type BoxProps = HTMLAttributes<HTMLDivElement> & {
 export function Box({
   children,
   className,
+  contentClassName,
   as: Comp = "div",
   glow = false,
   flush = false,
@@ -46,7 +48,7 @@ export function Box({
         className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-moon/15 blur-2xl transition group-hover:bg-moon/25"
         aria-hidden
       />
-      <div className="relative z-10">{children}</div>
+      <div className={cn("relative z-10", contentClassName)}>{children}</div>
     </Comp>
   );
 }
